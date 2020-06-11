@@ -1,2 +1,8 @@
 *.class
 *.log
+.envrc
+.bloop
+.metals
+target
+project/target
+metals.sbt
