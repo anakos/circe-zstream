@@ -1,7 +1,6 @@
 package zio
 package circe
 
-import cats.syntax.either._
 import io.circe._
 import io.circe.generic.auto._
 import io.circe.syntax._
@@ -48,27 +47,5 @@ package object test {
       .map { _.toVector }
 
   def verifyStreamElements[E, A](stream: Stream[Throwable,A], expectedElements: List[A]) =
-    assertM(stream.runCollect.either)(equalTo(Chunk.fromIterable(expectedElements).asRight))
-
-  // TODO: submit a PR for this?
-  /** Encodes a stream of `String` in to a stream of bytes using the given charset. */
-  def encode(charset: java.nio.charset.Charset): Transducer[Throwable, String, Byte] =
-    ZTransducer.fromPush {
-      case None      =>
-        ZIO.succeed(Chunk.empty)
-      case Some(str) =>
-        ZIO { str.flatMap(in => Chunk.fromArray(in.getBytes(charset))) }
-    }  
-
-  /** Encodes a stream of `String` in to a stream of `Chunk[Byte]` using the given charset. */
-  def encodeC(charset: java.nio.charset.Charset) =
-    ZTransducer
-      .fromFunctionM { in: String => ZIO { Chunk.fromArray(in.getBytes(charset)) } }
-
-  private val utf8Charset = java.nio.charset.Charset.forName("UTF-8")
-  /** Encodes a stream of `String` in to a stream of bytes using the UTF-8 charset. */
-  def utf8Encode = encode(utf8Charset)
-
-  /** Encodes a stream of `String` in to a stream of `Chunk[Byte]` using the UTF-8 charset. */
-  def utf8EncodeC = encodeC(utf8Charset)
+    assertM(stream.runCollect.either)(equalTo(Right(Chunk.fromIterable(expectedElements))))
 }

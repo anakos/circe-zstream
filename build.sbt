@@ -14,19 +14,53 @@ inThisBuild(
     licenses += ("MIT", url("https://github.com/anakos/circe-zstream/blob/master/LICENSE")),
     publishMavenStyle := true,
     addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.3.1"),
+    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full),
     testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"),
     resolvers +=
       "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
   )
 )
 
-libraryDependencies ++= List(
-  cats.core,
-  circe.core,
-  circe.generic,
-  circe.jawn,
-  zio.core,
-  zio.streams,
-  zio.test          % Test,
-  zio.test_sbt      % Test,
-)
+lazy val root = (project in file("."))
+  .settings(
+    publish         := {},
+    publishLocal    := {},
+    publishArtifact := false,
+  )
+  .aggregate(core, benchmark)
+
+
+lazy val core =
+  Project("circe-zstream", file("lib"))
+    .settings(
+      libraryDependencies ++= List(
+        circe.core,
+        circe.generic,
+        circe.jawn,
+        zio.core,
+        zio.streams,
+        zio.test      % Test,
+        zio.test_sbt  % Test,
+      )
+    )
+
+lazy val benchmark =
+  Project("circe-zstream-benchmark", file(s"benchmark"))
+    .settings(
+      publish         := {},
+      publishLocal    := {},
+      publishArtifact := false,
+      libraryDependencies ++= List(
+        "co.fs2"   %% "fs2-core"  % "2.4.1",
+        "co.fs2"   %% "fs2-io"    % "2.4.1",
+        "io.circe" %% "circe-fs2" % "0.13.0",
+        circe.core,
+        circe.jawn,
+        zio.core,
+        zio.streams,
+        zio.test     % Test,
+        zio.test_sbt % Test,
+      )
+    )
+    .enablePlugins(JmhPlugin)
+    .dependsOn(core)
