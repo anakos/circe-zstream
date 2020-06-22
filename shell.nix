@@ -3,6 +3,7 @@ let
 in
 with pkgs; pkgs.mkShell rec {
   buildInputs = [
+    linuxPackages.perf
     scala
     sbt
     openssl

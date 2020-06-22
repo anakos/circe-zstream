@@ -1,12 +1,12 @@
 package zio
 package circe
 
-import cats.syntax.either._
 import io.circe.syntax._
 import io.circe.generic.auto._
 import org.typelevel.jawn.AsyncParser
 import zio.circe.examples._
 import zio.circe.test._
+import zio.circe.text._
 import zio.stream._
 import zio.test._
 import zio.test.Assertion
@@ -76,8 +76,8 @@ object ZStreamParsingSuite extends zio.test.DefaultRunnableSpec {
                   byteParser(AsyncParser.SingleValue)
  
               for {
-                result1 <- assertM(parseOnce.runCollect.either)(Assertion.equalTo(Chunk(foo.asJson).asRight))
-                result2 <- assertM(parseOnce.runCollect.either)(Assertion.equalTo(Chunk(foo.asJson).asRight))
+                result1 <- assertM(parseOnce.runCollect.either)(Assertion.equalTo(Right(Chunk(foo.asJson))))
+                result2 <- assertM(parseOnce.runCollect.either)(Assertion.equalTo(Right(Chunk(foo.asJson))))
               } yield result1 && result2
             }
           ),

@@ -1,16 +1,9 @@
 import sbt._
 
 object Dependencies {
-  object cats {
-    def mkModule(name: String) =
-      "org.typelevel" %% s"cats-${name}" % "2.2.0-M2"
-
-    val core    = mkModule("core")
-  }  
-
   object circe {
     def mkModule(name: String) =
-      "io.circe" %% s"circe-${name}" % "0.13.0"
+      "io.circe" %% s"circe-${name}" % "0.14.0-M1"
 
     val core     = mkModule("core")
     val generic  = mkModule("generic")
@@ -19,7 +12,7 @@ object Dependencies {
 
   object zio {
     def mkModule(name: String) =
-      "dev.zio" %% name % "1.0.0-RC20+51-197673dc-SNAPSHOT"
+      "dev.zio" %% name % "1.0.0-RC21"
 
     val core     = mkModule("zio")
     val streams  = mkModule("zio-streams")

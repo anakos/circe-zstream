@@ -1,0 +1,10 @@
+-J-Xms1G
+-J-Xmx7G
+-J-Xss100m
+-J-Duser.timezone=GMT
+-J-XX:MaxMetaspaceSize=512M
+-J-XX:ReservedCodeCacheSize=256M
+-J-XX:+TieredCompilation
+-J-XX:-UseGCOverheadLimit
+-J-XX:+CMSClassUnloadingEnabled
+-J-XX:+UseConcMarkSweepGC
