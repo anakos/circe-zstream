@@ -13,8 +13,6 @@ inThisBuild(
     developers := List(Developer("anakos", "Alexander Nakos", "anakos@gmail.com", url("https://github.com/anakos"))),
     licenses += ("MIT", url("https://github.com/anakos/circe-zstream/blob/master/LICENSE")),
     publishMavenStyle := true,
-    addCompilerPlugin("com.olegpy"    %% "better-monadic-for" % "0.3.1"),
-    addCompilerPlugin("org.typelevel" %% "kind-projector" % "0.11.0" cross CrossVersion.full),
     testFrameworks += new TestFramework("zio.test.sbt.ZTestFramework"),
     resolvers +=
       "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
