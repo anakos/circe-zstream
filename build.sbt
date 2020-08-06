@@ -7,7 +7,7 @@ ThisBuild / publishTo := sonatypePublishToBundle.value
 inThisBuild(
   List(
     organization := "io.github.anakos",
-    scalaVersion := "2.13.2",
+    scalaVersion := "2.13.3",
     homepage := Some(url("https://github.com/anakos/circe-zstream")),
     scmInfo := Some(ScmInfo(url("https://github.com/anakos/circe-zstream"), "git@github.com:anakos/circe-zstream.git")),
     developers := List(Developer("anakos", "Alexander Nakos", "anakos@gmail.com", url("https://github.com/anakos"))),

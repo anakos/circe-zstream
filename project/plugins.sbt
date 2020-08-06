@@ -1,6 +1,6 @@
 import sbt._
 
-addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.10")
+addSbtPlugin("io.github.davidgregory084" % "sbt-tpolecat" % "0.1.13")
 
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "1.0.13")
 

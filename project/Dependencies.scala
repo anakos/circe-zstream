@@ -12,7 +12,7 @@ object Dependencies {
 
   object zio {
     def mkModule(name: String) =
-      "dev.zio" %% name % "1.0.0-RC21"
+      "dev.zio" %% name % "1.0.0"
 
     val core     = mkModule("zio")
     val streams  = mkModule("zio-streams")

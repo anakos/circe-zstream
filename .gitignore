@@ -3,6 +3,7 @@
 .envrc
 .bloop
 .metals
+.vscode
 target
 project/target
 metals.sbt
